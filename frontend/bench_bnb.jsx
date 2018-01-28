@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as SessionApi from './util/session_api_util';
+import configureStore from './store/store';
+import Root from './components/root';
+import { login } from './actions/session_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
+  const store = configureStore();
+
+  // Testing Start
   window.SessionApi = SessionApi;
-  ReactDOM.render(<h1>BenchBnB</h1>, root);
+  window.getState = store.getState;
+  window.dispatch = store.dispatch;
+  window.login = login;
+  // Testing End
+
+  ReactDOM.render(<Root store={store} />, root);
 });
 
+// Ajax tests
 // $.ajax({
 //   method: 'POST',
 //   url: '/api/users',
@@ -23,3 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
 //   url: '/api/users/4',
 //   dataType: 'json'
 // }).then((user) => console.log(user));
+
+// LOGIN
+// window.dispatch(login({
+//   username: 'test',
+//   password: 'password'
+// }));
