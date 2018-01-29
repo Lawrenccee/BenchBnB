@@ -49,3 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
 //   username: 'test',
 //   password: 'password'
 // }));
+
+// $.ajax({
+//   method: 'POST',
+//   url: '/api/benches',
+//   dataType: 'json',
+//   data: { bench: { description: "new bench", lat: 37.740000, lng: -122.400000 } }
+// }).then((user) => console.log(user));
