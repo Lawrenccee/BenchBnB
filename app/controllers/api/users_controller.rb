@@ -4,10 +4,9 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       login(@user)
-      p @user
       redirect_to api_user_url(@user)
     else
-      render json: @user.errors.full_messages
+      render json: @user.errors.full_messages, status: 402
     end
   end
 
@@ -19,6 +18,7 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
+    p params
     params.require(:user).permit(:username, :password)
   end
 end

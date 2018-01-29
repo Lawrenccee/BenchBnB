@@ -10,7 +10,23 @@ export const sessionErrorsReducer = (oldState = [], action) => {
     case RECEIVE_CURRENT_USER:
       return [];
     case RECEIVE_SESSION_ERRORS:
-      return oldState.concat(action.err);
+      let newState = oldState.slice();
+
+      action.err.forEach(error => {
+        if (error.responseJSON) {        
+          error.responseJSON.forEach((response) => {
+            if (newState.indexOf(response) < 0) {
+              newState.push(response);
+            } 
+          });
+        } else {
+          if (newState.indexOf(error.responseText) < 0) {
+            newState.push(error.responseText);
+          }
+        } 
+      });
+
+      return newState;
     default:
       return oldState;
   }
