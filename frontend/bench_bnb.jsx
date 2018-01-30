@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as SessionApi from './util/session_api_util';
+import * as BenchApi from './util/bench_api_util';
+import { fetchBenches } from './actions/bench_actions';
 import configureStore from './store/store';
 import Root from './components/root';
 import { login } from './actions/session_actions';
@@ -19,8 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Testing Start
   window.SessionApi = SessionApi;
+  window.BenchApi = BenchApi;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
+  window.fetchBenches = fetchBenches;
   window.login = login;
   // Testing End
 
